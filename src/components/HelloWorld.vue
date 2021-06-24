@@ -52,23 +52,33 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { Modal } from 'bootstrap'
+import { onMounted, ref } from '@vue/composition-api'
+// import anyNewFeaturesYouDLikeFromVue3 //
 
 export default {
   name: 'HelloW',
   props: {
     msg: String
   },
-  data() {
+  setup(props) {
+    console.log(props) // { user: '' }
+    const count = 0
+    // more explanation about ref
+    // pls see => https://codingexplained.com/coding/front-end/vue-js/accessing-dom-refs
+    // or => https://vuejs.org/v2/api/#ref
+    let exampleModal = ref(null)
+    onMounted(() => {
+      console.log('mounted in the composition api!')
+      console.log(exampleModal.value)
+      exampleModal = new Modal(exampleModal.value)
+      console.log(exampleModal)
+    })
     return {
-      count: 0,
-      modal: null
-    }
-  },
-  mounted() {
-    console.log(this.$refs)
-    this.modal = new Modal(this.$refs.exampleModal)
+      count,
+      exampleModal
+    } // anything returned here will be available for the rest of the component
   }
 }
 </script>
