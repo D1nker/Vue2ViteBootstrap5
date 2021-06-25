@@ -19,28 +19,42 @@
       Edit
       <code>components/HelloWorld.vue</code> to test hot module replacement.
     </p>
-
-    <button type="button" class="btn btn-primary" @click="modal.show()">
+    <!-- Button trigger modal -->
+    <button
+      type="button"
+      class="btn btn-primary"
+      data-bs-toggle="modal"
+      data-bs-target="#modal"
+    >
       Launch demo modal
     </button>
-    <div class="modal fade" ref="exampleModal" tabindex="-1" aria-hidden="true">
+
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="modal"
+      ref="modal"
+      tabindex="-1"
+      aria-labelledby="modalLabel"
+      aria-hidden="true"
+    >
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+            <h5 class="modal-title" id="modalLabel">Modal title</h5>
             <button
               type="button"
               class="btn-close"
-              @click="modal.hide()"
+              data-bs-dismiss="modal"
               aria-label="Close"
             ></button>
           </div>
-          <div class="modal-body">...</div>
+          <div class="modal-body">Bootstrap 5 Simple Modal</div>
           <div class="modal-footer">
             <button
               type="button"
               class="btn btn-secondary"
-              @click="modal.hide()"
+              data-bs-dismiss="modal"
             >
               Close
             </button>
@@ -52,7 +66,7 @@
   </div>
 </template>
 
-<script setup>
+<script>
 import { Modal } from 'bootstrap'
 import { onMounted, ref } from '@vue/composition-api'
 // import anyNewFeaturesYouDLikeFromVue3 //
@@ -63,21 +77,19 @@ export default {
     msg: String
   },
   setup(props) {
-    console.log(props) // { user: '' }
+    console.log(props) // { msg: '' }
     const count = 0
     // more explanation about ref
     // pls see => https://codingexplained.com/coding/front-end/vue-js/accessing-dom-refs
-    // or => https://vuejs.org/v2/api/#ref
-    let exampleModal = ref(null)
+    // or => https://v3.vuejs.org/guide/component-template-refs.html
+    let modal = ref(null)
     onMounted(() => {
       console.log('mounted in the composition api!')
-      console.log(exampleModal.value)
-      exampleModal = new Modal(exampleModal.value)
-      console.log(exampleModal)
+      modal = new Modal(modal.value)
     })
     return {
       count,
-      exampleModal
+      modal
     } // anything returned here will be available for the rest of the component
   }
 }
